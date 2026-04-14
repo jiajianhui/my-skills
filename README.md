@@ -14,6 +14,12 @@
 - `dev/`：开发相关 skill
 - `product/`：产品相关 skill
 
+其中 `design/` 当前细分为：
+
+- `ui-direction/`：专注网站、产品界面、落地页、后台等 UI 设计方向
+- `brand-direction/`：专注品牌气质、品牌关键词和视觉语言方向
+- `graphic-design/`：专注海报、KV、社媒图、宣传物料等平面设计
+
 ## 制作 Skill 的两个关键原则
 
 1. `SKILL.md` 要短、准，只写 agent 真正需要的流程、判断标准和执行方式。
