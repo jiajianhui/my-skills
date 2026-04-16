@@ -20,6 +20,13 @@
 - `brand-direction/`：专注品牌气质、品牌关键词和视觉语言方向
 - `graphic-design/`：专注海报、KV、社媒图、宣传物料等平面设计
 
+其中 `product/` 当前细分为：
+
+- `problem-insight/`：用于澄清真实问题、识别用户痛点、拆开目标与方案
+- `prd-breakdown/`：用于定义需求范围、用户流程、边界情况和验收标准
+- `task-breakdown/`：用于把需求继续拆成执行任务、依赖和里程碑
+- `product-workflow/`：作为统一入口，判断当前任务应进入哪一层
+
 ## 制作 Skill 的两个关键原则
 
 1. `SKILL.md` 要短、准，只写 agent 真正需要的流程、判断标准和执行方式。
