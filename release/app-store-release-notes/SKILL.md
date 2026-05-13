@@ -1,0 +1,105 @@
+---
+name: app-store-release-notes
+description: 当用户说生成版本更新说明、写版本更新说明、生成 App Store 更新说明、撰写 What's New、整理版本日志，或需要为 App Store、TestFlight、Google Play 和应用版本发布生成中英文双语更新文案时，使用这个 skill。
+---
+
+# App Store 版本更新说明
+
+这个 skill 用于把一次应用更新整理成适合商店提交的中英文版本更新说明。目标是简洁、清楚、用户可读，避免工程术语、内部命名和夸张营销语。
+
+## 默认输出格式
+
+最终可直接使用的版本更新说明必须按语言分别放在两个 `text` 代码块中：中文一个，英文一个，方便用户分别一键复制。除非用户要求解释或提供多个方案，否则不要把正式文案散落在普通正文里。
+
+中文：
+
+```text
+本次更新
+1. ...
+2. ...
+3. ...
+```
+
+英文：
+
+```text
+What's New
+1. ...
+2. ...
+3. ...
+```
+
+## 工作流程
+
+1. 先识别本次版本的真实改动：新增、优化、修复、体验改进、稳定性提升。
+2. 判断每个改动对用户有什么可感知收益，而不是直接复述代码、页面或模块名称。
+3. 将工程表述转成普通用户能理解的体验收益；如果用户看不到具体变化，就合并到稳定性或体验优化里。
+4. 默认输出 3 条；若用户给出的改动少于 3 条，可以合并为 2 条；不要硬凑重复内容。
+5. 先写中文，再写英文。英文应自然，不要逐字硬翻。
+6. 保持中英文含义对齐，条目顺序一致。
+7. 如果用户提供了具体版本号、平台、功能名或目标语气，保留这些上下文，但不要强行放入标题。
+
+## 文案规则
+
+- 中文标题固定为 `本次更新`，英文标题固定为 `What's New`，除非用户指定其他标题。
+- 每条尽量控制在一行，避免长句。
+- 使用积极但克制的表达：优化、改进、提升、修复、支持。
+- 避免使用内部术语，如接口、重构、SDK、埋点、缓存策略、崩溃堆栈，除非这是面向开发者的应用。
+- 避免使用内部页面名、模块名、组件名或开发代号，如 `Pro 页面`、`Paywall`、`Dashboard`、`ViewModel`、`StoreKitService`。改写成用户能理解的对象，如订阅、购买、首页、统计、相机、识别结果。
+- 不要写“优化某页面”这种只描述位置的句子，要写清楚用户感受到的变化：展示更清晰、流程更顺畅、等待更少、提示更明确、结果更稳定。
+- 避免无法验证或过度承诺的词：完美、革命性、极大、全面升级、史诗级。
+- 不要提及 Apple 审核、提交、版本号、开发流程，除非用户明确要求。
+- 如果是 bug fix，可以写成用户收益：`修复已知问题，提升使用稳定性`。
+- 如果变更很杂，可以用稳定性兜底：`优化交互细节与整体稳定性` / `Optimized interaction details and overall stability`。
+
+## 输出前自检
+
+发布前检查每条文案：
+
+1. 用户能否理解这条更新和自己有什么关系？
+2. 是否出现了内部命名、开发术语或页面代号？如果有，改成用户视角。
+3. 是否只是说“优化页面/模块/组件”，却没有说明体验收益？如果是，补成“更清晰、更顺畅、更稳定”等可感知结果。
+4. 是否承诺了无法验证的效果？如果是，改成克制表达。
+
+## 常用表达映射
+
+- 优化相机打开体验 -> Improved the camera opening experience
+- 改进拍照识别流程 -> Enhanced the photo recognition flow
+- 优化交互细节与整体稳定性 -> Optimized interaction details and overall stability
+- 修复已知问题，提升稳定性 -> Fixed known issues and improved stability
+- 提升加载速度 -> Improved loading speed
+- 优化页面响应体验 -> Improved page responsiveness
+- 改进识别准确性 -> Improved recognition accuracy
+- 新增对 ... 的支持 -> Added support for ...
+- 优化登录流程 -> Improved the sign-in flow
+- 优化 Pro 页面价格加载体验 -> 优化订阅价格展示体验 / Improved the subscription price display experience
+- 优化 Paywall 价格骨架屏 -> 订阅价格加载时显示更清晰 / Clearer subscription price loading
+- 优化购买按钮状态 -> 改进购买流程中的状态提示 / Refined purchase status prompts
+
+## 询问策略
+
+如果用户只说“帮我写本次 App Store 更新说明”但没有提供任何改动，先简短询问本次版本改了什么。不要凭空编造具体功能。
+
+如果用户给了 commit、PR、更新点、中文草稿或英文草稿，直接整理成双语固定格式。除非信息明显不足，不要反复追问。
+
+## 输出示例
+
+输入：
+
+```text
+相机打开更顺了，拍照识别步骤改了，整体交互和稳定性优化
+```
+
+输出：
+
+```text
+本次更新
+1. 优化相机打开体验
+2. 改进拍照识别流程
+3. 优化交互细节与整体稳定性
+
+What's New
+1. Improved the camera opening experience
+2. Enhanced the photo recognition flow
+3. Optimized interaction details and overall stability
+```

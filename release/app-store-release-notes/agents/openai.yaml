@@ -1,0 +1,7 @@
+interface:
+  display_name: "App Store 更新说明"
+  short_description: "生成中英文应用商店版本更新说明"
+  default_prompt: "Use $app-store-release-notes to draft Chinese and English App Store release notes for this version."
+
+policy:
+  allow_implicit_invocation: true
