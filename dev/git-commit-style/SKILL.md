@@ -83,7 +83,7 @@ description: 当用户要求提交代码、创建 commit、整理暂存并提交
 - 打 tag
 - 生成版本更新说明
 
-默认采用轻量方案 A：`release commit + git tag`。
+默认采用稳定发版方案：`release commit + annotated tag`。
 
 自动判断规则：
 
@@ -99,13 +99,18 @@ description: 当用户要求提交代码、创建 commit、整理暂存并提交
 3. 如果用户要求“发版”但还没有改版本号，可以按项目现有位置修改版本号/构建号；如果不确定版本文件位置，先搜索并确认。
 4. release commit 的默认提交信息使用：`💎新版本——<version>`，保持本仓库历史风格。
 5. release tag 的默认格式使用：`v-<version>`，例如 `v-1.1.4`，保持本仓库现有 tag 风格。
-6. tag 应打在 release commit 上；如果本次没有 release commit，必须先向用户说明并确认是否直接给当前 HEAD 打 tag。
-7. 完成后返回 release commit hash、tag 名称，以及本次版本包含的主要变更摘要。
+6. release tag 必须使用 annotated tag：`git tag -a v-<version> -m "v-<version>"`；不要使用 `git tag v-<version>` 创建 lightweight tag。
+7. tag 应打在 release commit 上；如果本次没有 release commit，必须先向用户说明并确认是否直接给当前 HEAD 打 tag。
+8. 完成后返回 release commit hash、tag 名称，以及本次版本包含的主要变更摘要。
 
 约束：
 
 - 不把普通功能改动混入 release commit；release commit 只包含版本号、构建号、发布说明等发版元数据。
 - 不自动 push，除非用户明确要求推送 main 或 tags。
+- 默认不执行 push；push 由用户手动在 GitHub Desktop 中完成。
+- 发版完成后必须提醒用户在 GitHub Desktop 中点击 `Push origin`，并确认 tag 标签旁没有“未推送”上箭头；如果仍有上箭头，说明 tag 还没有到 GitHub 远端。
+- 如果用户明确要求由 Codex 代为推送发版结果，才显式推送当前分支和当前版本 tag，例如：`git push origin main v-<version>`；不要依赖普通 `git push` 或 `git push --follow-tags`。
+- 不使用 `git push --tags` 作为默认发版推送方式，避免把本地历史遗留 tag 一次性全部推到远端；只有用户明确要求同步所有 tag 时才使用。
 - 不自动上传 App Store / TestFlight，除非用户明确要求。
 - 如果本次版本号低于或等于最近 tag，先停止并提示风险。
 
