@@ -26,6 +26,7 @@
 - `prd-breakdown/`：用于定义需求范围、用户流程、边界情况和验收标准
 - `task-breakdown/`：用于把需求继续拆成执行任务、依赖和里程碑
 - `product-workflow/`：作为统一入口，判断当前任务应进入哪一层
+- `self-check/`：按产品价值类型进行阶段自检与校正；`SKILL.md` 为 AI 工作说明，`GUIDE.md` 为个人阅读手册
 
 ## 制作 Skill 的两个关键原则
 
